@@ -13,14 +13,18 @@ public class LinkedList{
         linkedList.afterNode(head.next,3);
         linkedList.deleteNode(2);
         linkedList.deleteNodeAtPosition(0);
-        linkedList.printList(linkedList.head);
-        System.out.println(linkedList.lengthOfList());
-        System.out.println(linkedList.lengthRecursive(linkedList.head));
 
+        System.out.println(linkedList.lengthOfList());
+        System.out.println(linkedList.search(3));
+        linkedList.printList(linkedList.head);
+        linkedList.printMiddle();
+        linkedList.printMiddleOnePtr();
     }
 
     //Complexity O(n)
     private void printList(Node head){
+        System.out.println("====List====");
+
         while(head!=null ){
             System.out.println(head.data);
             head = head.next;
@@ -108,6 +112,48 @@ public class LinkedList{
         return 1+ lengthRecursive(head.next);
     }
 
+    private int search(int data){
+        Node head = this.head;
+        int loc = 0;
+        while(head !=null && head.data!=data){
+            head = head.next;
+            loc++;
+        }
+        if(head!=null){
+            return loc;
+
+        }
+        return -1;
+
+    }
+
+    private void printMiddle(){
+        Node slow = this.head;
+        Node fastPtr = this.head;
+        while(fastPtr!=null && fastPtr.next!=null){
+            slow = slow.next;
+            fastPtr = fastPtr.next.next;
+        }
+        if(slow!=null){
+            System.out.println("Middle:"+slow.data);
+        }
+    }
+
+    private void printMiddleOnePtr(){
+        Node mid = this.head;
+        Node head = this.head;
+        int count=0;
+        while(head!=null ){
+            if((count & 1)==1)
+                mid = mid.next;
+            ++count;
+            head = head.next;
+        }
+        if(mid!=null){
+            System.out.println("Middle:"+mid.data);
+        }
+    }
+
      private static class Node {
         int data;
         Node next;
@@ -122,4 +168,5 @@ public class LinkedList{
             next=null;
         }
     }
+
 }
