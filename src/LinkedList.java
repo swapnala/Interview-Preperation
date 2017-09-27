@@ -19,6 +19,7 @@ public class LinkedList{
         linkedList.printList(linkedList.head);
         linkedList.printMiddle();
         linkedList.printMiddleOnePtr();
+        linkedList.printList(linkedList.reverse());
     }
 
     //Complexity O(n)
@@ -152,6 +153,20 @@ public class LinkedList{
         if(mid!=null){
             System.out.println("Middle:"+mid.data);
         }
+    }
+
+    private Node reverse(){
+        Node current  = this.head;
+        Node next = null;
+        Node prev= null;
+        while(current!=null){
+           next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
+        this.head = prev;
+        return this.head;
     }
 
      private static class Node {
